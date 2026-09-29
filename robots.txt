@@ -1,0 +1,4 @@
+# Client design previews, not a live site.
+# Keep unfinished drafts out of search results under the client's name.
+User-agent: *
+Disallow: /
