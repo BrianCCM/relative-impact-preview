@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relative Impact | Life Story Films with Josh Frates</title>
+<meta name="description" content="Professionally produced life story films. A relaxed, guided interview paired with family photographs, home video, and music, preserved as a keepsake for generations.">
+<link rel="icon" href="../brand_assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#060504">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Luxurious+Script&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:      { DEFAULT:'#060504', 2:'#0d0b09', 3:'#15120e' },
+        gold:     { DEFAULT:'#c4a131', lt:'#e0c476', dp:'#7d6620' },
+        aqua:     '#72c1cd',
+        bone:     '#f3f4f0',
+      },
+      fontFamily: {
+        display: ['"Bodoni Moda"','Didot','Georgia','serif'],
+        body:    ['"EB Garamond"','Georgia','serif'],
+        script:  ['"Luxurious Script"','cursive'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  :root{
+    --ink:#060504; --ink-2:#0d0b09; --ink-3:#15120e;
+    --gold:#c4a131; --gold-lt:#e0c476; --gold-dp:#7d6620;
+    --aqua:#72c1cd; --bone:#f3f4f0;
+    --dim:rgba(243,244,240,.60);
+    --hair:rgba(196,161,49,.26);
+
+    /* spacing scale */
+    --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6rem; --s7:9rem;
+
+    /* depth: dark-only, layered */
+    --lift-1:0 1px 2px rgba(0,0,0,.70);
+    --lift-2:0 1px 2px rgba(0,0,0,.65), 0 10px 26px rgba(0,0,0,.55);
+    --lift-3:0 1px 2px rgba(0,0,0,.6), 0 14px 34px rgba(0,0,0,.6), 0 40px 80px rgba(0,0,0,.5);
+
+    --spring:cubic-bezier(.22,1,.36,1);
+  }
+
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--ink); color:var(--bone);
+    font-family:"EB Garamond",Georgia,serif; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:rgba(196,161,49,.32); color:#fff; }
+
+  /* ── grain + layered ambience ─────────────────────────────── */
+  .grain::after{
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:40;
+    opacity:.30; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
+
+  .label{
+    font-family:"EB Garamond",Georgia,serif;
+    text-transform:uppercase; letter-spacing:.26em; font-size:.6875rem; font-weight:500;
+  }
+
+  /* ── header ───────────────────────────────────────────────── */
+  .nav-link{
+    position:relative; color:var(--dim);
+    transition:color .35s var(--spring), transform .35s var(--spring);
+  }
+  .nav-link::after{
+    content:""; position:absolute; left:0; right:0; bottom:-.45rem; height:1px;
+    background:var(--gold); transform:scaleX(0); transform-origin:left;
+    transition:transform .45s var(--spring), opacity .35s var(--spring); opacity:0;
+  }
+  .nav-link:hover, .nav-link:focus-visible{ color:var(--bone); outline:none; }
+  .nav-link:hover::after, .nav-link:focus-visible::after{ transform:scaleX(1); opacity:1; }
+  .nav-link:active{ transform:translateY(1px); }
+  .nav-link:focus-visible{ color:var(--gold-lt); }
+
+  #site-header{
+    transition:transform .5s var(--spring), opacity .4s var(--spring);
+  }
+  #header-veil{
+    position:absolute; inset:0; z-index:-1; opacity:0;
+    background:linear-gradient(to bottom, rgba(6,5,4,.94), rgba(6,5,4,.78));
+    backdrop-filter:blur(14px) saturate(120%);
+    -webkit-backdrop-filter:blur(14px) saturate(120%);
+    border-bottom:1px solid rgba(196,161,49,.16);
+    transition:opacity .5s var(--spring);
+  }
+  #site-header.is-stuck #header-veil{ opacity:1; }
+
+  /* ── buttons ──────────────────────────────────────────────── */
+  .btn{
+    position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+    text-transform:uppercase; letter-spacing:.2em; font-size:.75rem; font-weight:500;
+    padding:1.05rem 2.1rem; border-radius:1px; overflow:hidden; isolation:isolate;
+    transition:transform .4s var(--spring), opacity .3s var(--spring), color .3s var(--spring);
+  }
+  .btn:active{ transform:translateY(1px) scale(.988); }
+  .btn:focus-visible{ outline:1px solid var(--gold-lt); outline-offset:3px; }
+
+  .btn-solid{ color:#120e05; background:var(--gold); box-shadow:var(--lift-2); }
+  .btn-solid::before{
+    content:""; position:absolute; inset:0; z-index:-1; background:var(--gold-lt);
+    transform:translateY(101%); transition:transform .5s var(--spring);
+  }
+  .btn-solid:hover{ transform:translateY(-2px); }
+  .btn-solid:hover::before{ transform:translateY(0); }
+
+  .btn-ghost{ color:var(--bone); border:1px solid rgba(196,161,49,.42); }
+  .btn-ghost::before{
+    content:""; position:absolute; inset:0; z-index:-1; background:rgba(196,161,49,.14);
+    transform:scaleY(0); transform-origin:bottom; transition:transform .5s var(--spring);
+  }
+  .btn-ghost:hover{ color:var(--gold-lt); transform:translateY(-2px); }
+  .btn-ghost:hover::before{ transform:scaleY(1); }
+
+  /* ── the corridor ─────────────────────────────────────────── */
+  #corridor{ container-type:inline-size; }
+  .ish-card{
+    position:absolute; overflow:hidden; will-change:transform;
+    backface-visibility:hidden;
+    box-shadow:var(--lift-3);
+  }
+  .ish-card img{ height:100%; width:100%; object-fit:cover; display:block; }
+  /* colour treatment: warm the greys toward the brand gold, then knock them back */
+  .ish-card::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(6,5,4,.55), rgba(6,5,4,0) 52%, rgba(6,5,4,.30));
+  }
+  .ish-card::before{
+    content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:linear-gradient(145deg, rgba(196,161,49,.26), rgba(114,193,205,.12));
+    mix-blend-mode:multiply;
+  }
+  @media (prefers-reduced-motion:reduce){ .ish-card{ animation-play-state:paused !important; } }
+
+
+  /* ── hero scrims ──────────────────────────────────────────────
+   * The corridor fills the frame, so the type is carried by four
+   * washes rather than one: an edge vignette, a vertical band that
+   * opens a clear window across the middle, a warm core, and a pool
+   * of dark seated under the supporting copy. A phone gets a wider
+   * clear window, because its corridor is a band rather than a room.
+   * ─────────────────────────────────────────────────────────── */
+  .scrim{ position:absolute; inset:0; z-index:10; pointer-events:none; }
+  .scrim-vignette{
+    background:radial-gradient(148% 104% at 50% 53%,
+      rgba(6,5,4,0) 24%, rgba(6,5,4,.16) 54%, rgba(6,5,4,.56) 84%, rgba(6,5,4,.78) 100%);
+  }
+  .scrim-vert{
+    background:linear-gradient(to bottom,
+      rgba(6,5,4,.98) 0%, rgba(6,5,4,.80) 16%, rgba(6,5,4,.12) 40%,
+      rgba(6,5,4,.52) 66%, rgba(6,5,4,.94) 86%, rgba(6,5,4,1) 100%);
+  }
+  .scrim-warm{
+    background:radial-gradient(56% 42% at 50% 50%,
+      rgba(196,161,49,.10), rgba(114,193,205,.05) 42%, rgba(6,5,4,0) 72%);
+  }
+  .scrim-seat{
+    top:auto; height:46%;
+    background:radial-gradient(66% 100% at 50% 100%,
+      rgba(6,5,4,.95), rgba(6,5,4,.70) 52%, rgba(6,5,4,0) 100%);
+  }
+  @media (max-width:719px){
+    .scrim-vignette{
+      background:radial-gradient(150% 90% at 50% 46%,
+        rgba(6,5,4,0) 30%, rgba(6,5,4,.10) 58%, rgba(6,5,4,.48) 86%, rgba(6,5,4,.70) 100%);
+    }
+    .scrim-vert{
+      background:linear-gradient(to bottom,
+        rgba(6,5,4,.98) 0%, rgba(6,5,4,.72) 24%, rgba(6,5,4,.02) 40%,
+        rgba(6,5,4,.10) 60%, rgba(6,5,4,.86) 80%, rgba(6,5,4,1) 100%);
+    }
+    .scrim-seat{ height:34%; }
+  }
+
+  /* ── hero type ────────────────────────────────────────────── */
+  .hero-script{
+    font-family:"Luxurious Script",cursive; color:var(--gold);
+    line-height:.9; letter-spacing:.01em;
+    text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+  }
+  .hero-display{
+    font-family:"Bodoni Moda",Didot,serif; color:var(--bone);
+    text-transform:uppercase; font-weight:400; line-height:.86; letter-spacing:-.012em;
+    transform:scaleX(.94); transform-origin:center;
+    text-shadow:0 2px 24px rgba(0,0,0,.9), 0 1px 4px rgba(0,0,0,.95);
+  }
+
+  /* entrance: transform + opacity only */
+  .rise{ opacity:0; transform:translateY(22px); }
+  .rise.in{ opacity:1; transform:none; transition:opacity .9s var(--spring), transform 1.1s var(--spring); }
+
+  @keyframes cue{ 0%,100%{ transform:translateY(0); opacity:.45 } 50%{ transform:translateY(7px); opacity:.9 } }
+  .cue-line{ animation:cue 2.6s var(--spring) infinite; }
+  @media (prefers-reduced-motion:reduce){ .cue-line{ animation:none } .rise{ opacity:1; transform:none } }
+
+
+  /* ── editorial sections ───────────────────────────────────── */
+  .sec{ position:relative; isolation:isolate; }
+  .sec-rule{ height:1px; background:linear-gradient(to right, rgba(196,161,49,0), rgba(196,161,49,.75), rgba(196,161,49,0)); }
+
+  .display-lg{
+    font-family:"Bodoni Moda",Didot,serif; text-transform:uppercase; font-weight:400;
+    line-height:.92; letter-spacing:-.012em; color:var(--bone);
+  }
+  .prose p{ margin-top:1.4em; }
+  .prose p:first-child{ margin-top:0; }
+
+  /* photographic treatment: grade toward the brand, then seat it in the dark */
+  .plate{ position:relative; overflow:hidden; box-shadow:var(--lift-3); }
+  .plate img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .plate::before{
+    content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:linear-gradient(150deg, rgba(196,161,49,.22), rgba(114,193,205,.12));
+    mix-blend-mode:multiply;
+  }
+  .plate::after{
+    content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+    background:linear-gradient(to top, rgba(6,5,4,.62), rgba(6,5,4,0) 58%);
+  }
+  .plate-edge{ outline:1px solid rgba(196,161,49,.22); outline-offset:-1px; }
+
+
+  /* ── footer ───────────────────────────────────────────────── */
+  .foot-link{ color:var(--dim); transition:color .3s var(--spring), transform .3s var(--spring); display:inline-block; }
+  .foot-link:hover, .foot-link:focus-visible{ color:var(--gold-lt); transform:translateX(3px); outline:none; }
+  .foot-link:focus-visible{ text-decoration:underline; text-underline-offset:4px; }
+  .foot-link:active{ transform:translateX(3px) translateY(1px); }
+
+  /* menu button: the bars cross into an X */
+  #menu-btn svg path{
+    transform-box:view-box; transform-origin:12px 13px;
+    transition:transform .45s var(--spring), opacity .3s var(--spring);
+  }
+  #menu-btn[aria-expanded="true"] #mb-1{ transform:rotate(45deg) translateY(6px); }
+  #menu-btn[aria-expanded="true"] #mb-2{ transform:rotate(-45deg); }
+  #menu-btn[aria-expanded="true"] #mb-3{ opacity:0; transform:translateX(-8px); }
+
+  /* mobile menu */
+  #mobile-panel{ opacity:0; transform:translateY(-8px); pointer-events:none;
+    transition:opacity .45s var(--spring), transform .55s var(--spring); }
+  #mobile-panel.open{ opacity:1; transform:none; pointer-events:auto; }
+
+  .atlas-credit{ opacity:.7; transition:opacity .24s cubic-bezier(.22,1,.36,1); }
+  .atlas-credit:hover, .atlas-credit:focus-visible{ opacity:1; }
+  .atlas-credit:active{ opacity:.85; }
+  @media (prefers-reduced-motion:reduce){ .atlas-credit{ transition:none; } }
+</style>
+</head>
+
+<body class="bg-ink text-bone font-body antialiased">
+
+<!-- ══ HEADER ═══════════════════════════════════════════════════ -->
+<header id="site-header" class="fixed inset-x-0 top-0 z-50">
+  <div id="header-veil"></div>
+  <div class="mx-auto flex max-w-[84rem] items-center justify-between gap-6 px-5 py-4 sm:px-8 lg:py-5">
+
+    <a href="#" class="group shrink-0 rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-8 focus-visible:outline-gold-lt"
+       aria-label="Relative Impact, home">
+      <img src="../brand_assets/logo-gold.png" alt="Relative Impact with Josh Frates"
+           class="h-9 w-auto transition-transform duration-500 [transition-timing-function:var(--spring)] group-hover:scale-[1.03] lg:h-11">
+    </a>
+
+    <nav class="hidden items-center gap-9 lg:flex" aria-label="Primary">
+      <a href="#" class="nav-link label">Why It Matters</a>
+      <a href="#" class="nav-link label">The Process</a>
+      <a href="#" class="nav-link label">Packages</a>
+      <a href="#" class="nav-link label">About Josh</a>
+    </nav>
+
+    <div class="hidden items-center gap-6 lg:flex">
+      <a href="tel:12086705372" class="nav-link label whitespace-nowrap">208.670.5372</a>
+      <a href="#" class="btn btn-ghost !px-6 !py-3">Start Your Story</a>
+    </div>
+
+    <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-panel"
+      class="group -mr-2 flex h-11 w-11 items-center justify-center rounded-sm text-bone transition-transform duration-300 [transition-timing-function:var(--spring)] hover:scale-105 active:translate-y-px focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-gold-lt lg:hidden">
+      <span class="sr-only">Open menu</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+        <path id="mb-1" d="M3 7h18" stroke-linecap="round"/>
+        <path id="mb-2" d="M3 13h18" stroke-linecap="round"/>
+        <path id="mb-3" d="M3 19h11" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-panel" class="lg:hidden">
+    <div class="mx-4 mb-4 rounded-sm border border-gold/20 bg-ink-2/95 px-6 py-7 shadow-[var(--lift-3)] backdrop-blur-xl">
+      <nav class="flex flex-col gap-5" aria-label="Mobile">
+        <a href="#" class="nav-link label">Why It Matters</a>
+        <a href="#" class="nav-link label">The Process</a>
+        <a href="#" class="nav-link label">Packages</a>
+        <a href="#" class="nav-link label">About Josh</a>
+      </nav>
+      <div class="mt-7 flex flex-col gap-4 border-t border-gold/15 pt-6">
+        <a href="tel:12086705372" class="nav-link label">208.670.5372</a>
+        <a href="#" class="btn btn-solid w-full">Start Your Story</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ══ HERO ═════════════════════════════════════════════════════ -->
+<section id="corridor" class="grain relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink">
+
+  <!-- the rails -->
+  <div id="rails" aria-hidden="true" class="pointer-events-none absolute inset-0 z-0"></div>
+
+  <!-- scrims: keep the type legible and pull the corridor back into the dark -->
+  <div aria-hidden="true" class="scrim scrim-vignette"></div>
+  <div aria-hidden="true" class="scrim scrim-vert"></div>
+  <div aria-hidden="true" class="scrim scrim-warm"></div>
+  <div aria-hidden="true" class="scrim scrim-seat"></div>
+
+  <!-- content -->
+  <div class="relative z-20 mx-auto flex w-full max-w-[84rem] flex-1 flex-col justify-between px-5 pb-8 pt-28 text-center sm:px-8 lg:pb-10 lg:pt-32">
+
+    <div class="rise mx-auto max-w-4xl lg:max-w-none">
+      <h1 class="mb-0">
+        <span class="hero-script block text-[4.5rem] leading-[.8] sm:text-[6rem] lg:text-[8.5rem]">Preserve</span>
+        <span class="hero-display mt-1 block text-balance text-[2.6rem] sm:text-[3.6rem] lg:whitespace-nowrap lg:text-[5.4rem]">Something Priceless</span>
+      </h1>
+    </div>
+
+    <div class="rise mx-auto mt-auto flex max-w-3xl flex-col items-center gap-6 pt-10" style="transition-delay:.18s">
+      <p class="max-w-xl text-pretty text-[1.0625rem] leading-[1.75] text-bone/70 sm:text-lg">
+        Professionally produced life story films. A relaxed, guided interview, woven together
+        with family photographs, home video, and the music that mattered, so the people who
+        come after you can still hear your voice.
+      </p>
+
+      <div class="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+        <a href="#" class="btn btn-solid w-full sm:w-auto">Book a Recording</a>
+        <a href="#" class="btn btn-ghost w-full sm:w-auto">View the Packages</a>
+      </div>
+
+      <div class="mt-1 flex flex-col items-center gap-2 text-bone/35">
+        <span class="label text-[.625rem]">Scroll</span>
+        <span class="cue-line block h-9 w-px bg-gradient-to-b from-gold/60 to-transparent"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY IT MATTERS ═══════════════════════════════════════════ -->
+<section id="why" class="sec grain overflow-hidden bg-ink">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10"
+       style="background:radial-gradient(70% 45% at 50% 0%, rgba(196,161,49,.07), rgba(6,5,4,0) 60%), radial-gradient(55% 40% at 8% 62%, rgba(114,193,205,.05), rgba(6,5,4,0) 70%);"></div>
+
+  <div class="mx-auto max-w-[84rem] px-5 py-24 sm:px-8 lg:py-32">
+
+    <!-- the question -->
+    <div class="rise mx-auto max-w-3xl text-center">
+      <h2 class="display-lg text-[2.1rem] sm:text-[3rem] lg:text-[3.9rem]">
+        How will they<br class="hidden sm:block"> remember you?
+      </h2>
+      <div class="sec-rule mx-auto mt-10 w-48"></div>
+      <p class="mx-auto mt-10 max-w-2xl text-pretty text-lg leading-[1.8] text-bone/70 sm:text-xl">
+        Not just through photographs, but through your voice, your laughter, and the
+        stories and wisdom that only you can share.
+      </p>
+    </div>
+
+    <!-- the comparison -->
+    <div class="mt-24 grid items-center gap-14 lg:mt-32 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+
+      <div class="rise relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+        <div class="plate plate-edge aspect-[3/4] w-[82%] rounded-[2px]">
+          <img src="../images/editorial/portrait-now.jpg" alt="An older woman photographed outdoors" loading="lazy" decoding="async">
+        </div>
+        <div class="plate plate-edge absolute -bottom-10 right-0 aspect-[3/4] w-[44%] rounded-[2px] sm:-bottom-14">
+          <img src="../images/editorial/portrait-then.jpg" alt="A studio portrait from decades earlier" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <div class="rise prose mt-16 max-w-xl text-[1.0625rem] leading-[1.8] text-bone/70 sm:text-lg lg:mt-0" style="transition-delay:.12s">
+        <p class="!text-bone !text-[1.15rem] sm:!text-[1.3rem] sm:!leading-[1.7]">
+          In many ways, it&rsquo;s like a documentary of your life. Just as a wedding film
+          carefully captures the emotion and significance of a single day, a life story
+          film captures something even greater, your entire journey.
+        </p>
+        <p>
+          Imagine your grandchildren, or even your great-grandchildren, being able to sit
+          down and hear your stories in your own voice. To see your expressions, your
+          humor, and your perspective on life.
+        </p>
+        <p>
+          It&rsquo;s something that no photo album alone can truly preserve.
+        </p>
+      </div>
+    </div>
+
+    <!-- what is lost -->
+    <div class="rise mt-32 grid overflow-hidden rounded-[2px] border border-gold/20 bg-ink-2 shadow-[var(--lift-3)] lg:mt-40 lg:grid-cols-[1.32fr_1fr]">
+      <div class="order-2 flex flex-col justify-center px-6 py-16 sm:px-12 sm:py-20 lg:order-1 lg:py-24 lg:pl-16 lg:pr-14">
+        <p class="display-lg text-balance text-[1.5rem] leading-[1.22] sm:text-[1.8rem] lg:text-[2rem]">
+          When stories aren&rsquo;t shared,<br class="hidden sm:block">
+          they slowly fade with time.
+        </p>
+        <div class="sec-rule mt-9 w-32 !bg-gradient-to-r !from-gold/70 !to-transparent"></div>
+        <p class="mt-9 max-w-lg text-[1.0625rem] leading-[1.8] text-bone/70 sm:text-lg">
+          Capturing them ensures that the memories, lessons, and love you have experienced
+          remain part of your family&rsquo;s history.
+        </p>
+      </div>
+
+      <div class="plate order-1 min-h-[20rem] lg:order-2">
+        <img class="absolute inset-0 !object-[50%_18%]" src="../images/editorial/fading.jpg" alt="A young girl walking away down a path, photographed decades ago" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <!-- the heirloom -->
+    <div class="rise mx-auto mt-28 max-w-3xl text-center lg:mt-36">
+      <p class="text-pretty text-[1.0625rem] leading-[1.8] text-bone/70 sm:text-lg">
+        Families often invest in filming special events that capture a single moment in
+        time. A life story film preserves something far more expansive, an entire lifetime
+        of experiences. Over the years, it becomes a family heirloom whose value only
+        continues to grow.
+      </p>
+      <div class="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+        <a href="#" class="btn btn-solid w-full sm:w-auto">Book a Recording</a>
+        <a href="#" class="btn btn-ghost w-full sm:w-auto">See How It Works</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
+<footer class="grain relative isolate overflow-hidden bg-ink">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0"
+       style="background:radial-gradient(80% 60% at 50% 0%, rgba(196,161,49,.08), rgba(6,5,4,0) 62%), radial-gradient(60% 50% at 88% 100%, rgba(114,193,205,.05), rgba(6,5,4,0) 70%);"></div>
+
+  <div class="relative mx-auto max-w-[84rem] px-5 pb-10 pt-16 sm:px-8 lg:pt-20">
+
+    <!-- ornamental rule, after the packet -->
+    <svg viewBox="0 0 900 26" class="mx-auto mb-12 hidden h-6 w-full max-w-3xl text-gold sm:mb-14 sm:block" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none">
+        <!-- rules, stepping in from the terminals -->
+        <path d="M22 13h118M152 13h164"/>
+        <path d="M878 13h-118M748 13h-164"/>
+        <!-- circle stops -->
+        <circle cx="324" cy="13" r="7"/><circle cx="576" cy="13" r="7"/>
+        <!-- pointed leaves -->
+        <path d="M331 13c22-10 66-10 88 0-22 10-66 10-88 0z"/>
+        <path d="M569 13c-22-10-66-10-88 0 22 10 66 10 88 0z"/>
+        <!-- mirrored centre curls -->
+        <path d="M438 13c0-8 7-13 13-9s4 13-5 13-9-5-8-8"/>
+        <path d="M462 13c0-8-7-13-13-9s-4 13 5 13 9-5 8-8"/>
+      </g>
+      <g fill="currentColor">
+        <path d="M8 13l10-5v10z"/><path d="M892 13l-10-5v10z"/>
+        <circle cx="146" cy="13" r="1.8"/><circle cx="754" cy="13" r="1.8"/>
+      </g>
+    </svg>
+
+    <svg viewBox="285 1 330 24" class="mx-auto mb-12 block h-5 w-full max-w-[17rem] text-gold sm:hidden" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none">
+        <path d="M291 13h26"/><path d="M609 13h-26"/>
+        <circle cx="324" cy="13" r="7"/><circle cx="576" cy="13" r="7"/>
+        <path d="M331 13c22-10 66-10 88 0-22 10-66 10-88 0z"/>
+        <path d="M569 13c-22-10-66-10-88 0 22 10 66 10 88 0z"/>
+        <path d="M438 13c0-8 7-13 13-9s4 13-5 13-9-5-8-8"/>
+        <path d="M462 13c0-8-7-13-13-9s-4 13 5 13 9-5 8-8"/>
+      </g>
+    </svg>
+
+    <div class="grid gap-14 lg:grid-cols-[1.35fr_1fr_1fr_1.15fr]">
+
+      <div>
+        <img src="../brand_assets/logo-gold.png" alt="Relative Impact with Josh Frates" class="h-12 w-auto">
+        <p class="hero-script mt-6 text-[2rem] leading-none text-gold/90">Preserve Something Priceless</p>
+        <p class="mt-5 max-w-xs text-[1.0625rem] leading-[1.75] text-bone/55">
+          Life story films for the people whose stories should outlast them.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="label text-gold/80">Explore</h2>
+        <ul class="mt-6 flex flex-col gap-3.5 text-[1.0625rem]">
+          <li><a href="#" class="foot-link">Why It Matters</a></li>
+          <li><a href="#" class="foot-link">The Process</a></li>
+          <li><a href="#" class="foot-link">About Josh</a></li>
+          <li><a href="#" class="foot-link">Frequently Asked</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="label text-gold/80">Packages</h2>
+        <ul class="mt-6 flex flex-col gap-3.5 text-[1.0625rem]">
+          <li><a href="#" class="foot-link">Legacy Essentials</a></li>
+          <li><a href="#" class="foot-link">Legacy Plus</a></li>
+          <li><a href="#" class="foot-link">Legacy Premium</a></li>
+          <li><a href="#" class="foot-link">Legacy Signature</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="label text-gold/80">Begin</h2>
+        <ul class="mt-6 flex flex-col gap-3.5 text-[1.0625rem]">
+          <li><a href="mailto:josh.relativeimpact@gmail.com" class="foot-link break-all">josh.relativeimpact@gmail.com</a></li>
+          <li><a href="tel:12086705372" class="foot-link">208.670.5372</a></li>
+        </ul>
+        <a href="#" class="btn btn-ghost mt-7 w-full !px-6 !py-3.5">Start Your Story</a>
+      </div>
+    </div>
+
+    <div class="mt-16 flex flex-col items-center justify-between gap-4 border-t border-gold/15 pt-7 sm:flex-row">
+      <p class="label text-[.625rem] text-bone/35">&copy; 2026 Relative Impact</p>
+      <p class="label text-[.625rem] text-bone/35">Life Story Films &middot; Josh Frates</p>
+    </div>
+
+    <div class="mt-9 flex justify-center">
+      <a href="https://atlasagency.com/web-design" target="_blank" rel="noopener"
+         class="atlas-credit inline-flex items-center gap-2.5 rounded text-[13px] text-bone/45 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
+        <span>Designed &amp; managed by</span>
+        <img src="../images/atlas-lockup-light.png" alt="Atlas Marketing Agency" width="631" height="120" class="h-[25px] w-auto">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── the corridor ──────────────────────────────────────────────
+ * Two rails of cards ride from far behind the screen toward the
+ * viewer. Perspective alone does the work that looks like two
+ * animations: as a card's z grows it gets bigger and its screen x
+ * sweeps outward from the vanishing point, because the projection
+ * scales position and size by the same factor.
+ *
+ * Depth is authored as apparent size, geometrically, so consecutive
+ * cards hold a constant size ratio and the ribbon never tears. The
+ * rails open hard in the first stretch and then hold (fan > 1), which
+ * cancels the still-slow growth back there so the ribbon leaves the
+ * centre as a flat band, bends once, then runs out on the diagonal.
+ * And railBirth is negative: a new card is born across the axis and
+ * sweeps back through the centre, which plugs the throat so dead
+ * centre never blinks open.
+ *
+ * Every length is in cqw, a percentage of the hero's width, so the
+ * corridor keeps its proportions at any size.
+ * ───────────────────────────────────────────────────────────── */
+(function () {
+  var PATH = {
+    perspective: 30,   // strength of the projection; lower is wider-angle
+    cardWidth:   14,   // world units
+    cardHeight:  19.4, // world units (0.72 ratio, matches the crops)
+    cardRadius:  0.25,
+    birthHeight: 3.0,  // on-screen card height at the waist
+    exitHeight:  62,   // on-screen card height as it leaves frame
+    railBirth:  -10,   // negative: born across the axis
+    railExit:    25,   // world units, so the projection multiplies it (see below)
+    fan:         3.0,
+    turnBirth:   6,
+    turnExit:    28,
+    stops:       24
+  };
+  var CARDS = 10, SPEED = 24;
+
+  // railExit is a *world* offset, so the projection multiplies it by the same
+  // factor it multiplies size: a card's screen centre lands at
+  // railExit x scale, and its inner edge at scale x (railExit - cardWidth/2).
+  // That inner edge has to clear 50cqw at death, or the loop seam shows, but
+  // only just: overshoot it and the cards fly out of frame before they have
+  // grown, which leaves a thin ribbon of small pictures.
+  //
+  // cqw also tracks the container's *width*, so on a narrow, tall phone the
+  // whole corridor shrinks away. The portrait profile scales both apparent-size
+  // ends together, keeping their ratio (that ratio is what holds the ribbon
+  // solid), and pulls the rails in to match.
+  var PROFILES = {
+    wide:     { axis: 53, birthHeight: 3.0, exitHeight:  62, railExit: 25, perspective: 30 },
+    portrait: { axis: 46, birthHeight: 4.35, exitHeight: 90, railExit: 19, perspective: 28 }
+  };
+
+  var IMAGES = [
+    '../images/stream/stream-04.jpg',
+    '../images/stream/stream-08.jpg',
+    '../images/stream/stream-01.jpg',
+    '../images/stream/stream-06.jpg',
+    '../images/stream/stream-02.jpg',
+    '../images/stream/stream-09.jpg',
+    '../images/stream/stream-03.jpg',
+    '../images/stream/stream-07.jpg',
+    '../images/stream/stream-05.jpg'
+  ];
+
+  function keyframes(dir, name, p) {
+    var steps = [];
+    for (var s = 0; s <= p.stops; s++) {
+      var u = s / p.stops;
+      // Geometric in apparent size, so the ribbon stays solid at both ends.
+      var scale = (p.birthHeight / p.cardHeight) * Math.pow(p.exitHeight / p.birthHeight, u);
+      var z = p.perspective * (1 - 1 / scale);
+      var rail = p.railExit - (p.railExit - p.railBirth) * Math.pow(1 - u, p.fan);
+      var turn = p.turnBirth + (p.turnExit - p.turnBirth) * u;
+      steps.push((u * 100).toFixed(2) + '%{transform:translate3d(' +
+        (dir * rail).toFixed(2) + 'cqw,0,' + z.toFixed(2) + 'cqw) rotateY(' +
+        (-dir * turn).toFixed(2) + 'deg)}');
+    }
+    return '@keyframes ' + name + '{' + steps.join('') + '}';
+  }
+
+
+  /**
+   * Lay `count` cards over `n` pictures so that no two cards next to each other
+   * in the loop carry the same one. The loop is a cycle, so the last card and
+   * the first are neighbours too, and that wrap is exactly where the same face
+   * used to turn up twice in a row: ten cards walking nine pictures with a
+   * plain modulo puts picture 0 at both ends of the run.
+   *
+   * With fewer pictures than cards some must repeat. Each slot takes the
+   * least-used picture, and among equals the one whose nearest twin is furthest
+   * away round the loop, so a repeat sits as close to the far side as the
+   * count allows.
+   */
+  function ribbon(count, n) {
+    var seq = [], used = [], i, j, k;
+    for (k = 0; k < n; k++) used[k] = 0;
+
+    for (i = 0; i < count; i++) {
+      var best = -1, bestGap = -1;
+      for (k = 0; k < n; k++) {
+        if (i > 0 && k === seq[i - 1]) continue;             // not right behind itself
+        if (i === count - 1 && k === seq[0]) continue;       // nor across the wrap
+        var gap = count;
+        for (j = 0; j < i; j++) {
+          if (seq[j] !== k) continue;
+          var d = i - j;
+          if (count - d < d) d = count - d;                  // measured round the loop
+          if (d < gap) gap = d;
+        }
+        if (best < 0 || used[k] < used[best] ||
+            (used[k] === used[best] && gap > bestGap)) { best = k; bestGap = gap; }
+      }
+      // Only unsatisfiable with one or two pictures, where no arrangement wins.
+      if (best < 0) best = i % n;
+      seq.push(best); used[best]++;
+    }
+    return seq;
+  }
+
+  var host = document.getElementById('rails');
+  if (!host) return;
+
+  var style = document.createElement('style');
+  document.head.appendChild(style);
+
+  var stage = document.createElement('div');
+  stage.className = 'absolute inset-0';
+  stage.style.transformStyle = 'preserve-3d';
+
+  // Both rails walk one order, so the left stays a mirror of the right at every
+  // depth, which is this version's whole conceit.
+  var ORDER = ribbon(CARDS, IMAGES.length);
+
+  ['ish-r', 'ish-l'].forEach(function (name) {
+    for (var i = 0; i < CARDS; i++) {
+      var card = document.createElement('div');
+      card.className = 'ish-card';
+      card.style.cssText =
+        'left:50%;' +
+        'width:' + PATH.cardWidth + 'cqw;height:' + PATH.cardHeight + 'cqw;' +
+        'margin-left:' + (-PATH.cardWidth / 2) + 'cqw;margin-top:' + (-PATH.cardHeight / 2) + 'cqw;' +
+        'border-radius:' + PATH.cardRadius + 'cqw;' +
+        'animation:' + name + ' ' + SPEED + 's linear infinite;' +
+        // Negative delay drops each card mid-flight, so the corridor is
+        // already full on the first frame.
+        'animation-delay:' + (-(i * SPEED) / CARDS) + 's;';
+
+      var img = document.createElement('img');
+      img.src = IMAGES[ORDER[i]];
+      img.alt = '';
+      img.decoding = 'async';
+      img.draggable = false;
+      if (i > 2) img.loading = 'lazy';
+      card.appendChild(img);
+      stage.appendChild(card);
+    }
+  });
+  host.appendChild(stage);
+
+  var cards = stage.children, applied = null;
+
+  function apply() {
+    var key = window.innerWidth < 720 ? 'portrait' : 'wide';
+    if (key === applied) return;
+    applied = key;
+
+    var p = Object.assign({}, PATH, PROFILES[key]);
+    style.textContent = keyframes(1, 'ish-r', p) + keyframes(-1, 'ish-l', p);
+    host.style.perspective = p.perspective + 'cqw';
+    host.style.perspectiveOrigin = '50% ' + p.axis + '%';
+    for (var i = 0; i < cards.length; i++) cards[i].style.top = p.axis + '%';
+  }
+
+  apply();
+  var t;
+  window.addEventListener('resize', function () {
+    clearTimeout(t); t = setTimeout(apply, 120);
+  }, { passive: true });
+})();
+
+/* ── header state ─────────────────────────────────────────────── */
+(function () {
+  var header = document.getElementById('site-header');
+  var onScroll = function () {
+    header.classList.toggle('is-stuck', window.scrollY > 24);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* ── mobile menu ──────────────────────────────────────────────── */
+(function () {
+  var btn = document.getElementById('menu-btn');
+  var panel = document.getElementById('mobile-panel');
+  if (!btn || !panel) return;
+  btn.addEventListener('click', function () {
+    var open = panel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.querySelector('.sr-only').textContent = open ? 'Close menu' : 'Open menu';
+  });
+})();
+
+/* ── entrances ────────────────────────────────────────────────── */
+(function () {
+  var items = document.querySelectorAll('.rise');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: .15 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

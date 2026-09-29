@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relative Impact | Three Design Directions</title>
+<meta name="description" content="Three design directions for the Relative Impact website, prepared for Josh Frates.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f8f6f1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=EB+Garamond:wght@400;500&family=Luxurious+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f8f6f1; --paper-2:#fdfcfa; --paper-3:#efeae0;
+    --ink:#171009; --ink-2:#3d332a; --ink-3:#6f6558;
+    --gold:#c4a131; --gold-ink:#8a7020;
+    --lift-2:0 1px 2px rgba(23,16,9,.06), 0 8px 20px rgba(23,16,9,.07);
+    --lift-3:0 1px 3px rgba(23,16,9,.07), 0 12px 28px rgba(23,16,9,.09), 0 30px 58px rgba(23,16,9,.07);
+    --spring:cubic-bezier(.22,1,.36,1);
+  }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink-2);
+    font-family:"EB Garamond",Georgia,serif; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:rgba(196,161,49,.30); color:var(--ink); }
+  .wrap{ max-width:76rem; margin:0 auto; padding:0 1.25rem; }
+  @media(min-width:640px){ .wrap{ padding:0 2rem; } }
+
+  header{ padding:2.5rem 0 0; }
+  header img{ height:2.75rem; width:auto; display:block; }
+
+  .intro{ padding:4rem 0 3rem; max-width:44rem; }
+  .script{
+    font-family:"Luxurious Script",cursive; color:var(--gold-ink);
+    font-size:3.25rem; line-height:.9; margin:0;
+  }
+  h1{
+    font-family:"Bodoni Moda",Didot,serif; color:var(--ink);
+    text-transform:uppercase; font-weight:400; letter-spacing:-.012em;
+    font-size:2.1rem; line-height:.92; margin:.5rem 0 0;
+  }
+  @media(min-width:640px){ .script{ font-size:4.25rem } h1{ font-size:2.9rem } }
+  .rule{ height:1px; width:7rem; margin:2rem 0; background:linear-gradient(to right,var(--gold),transparent); }
+  .lede{ margin:0; font-size:1.0625rem; }
+  @media(min-width:640px){ .lede{ font-size:1.125rem } }
+
+  .grid{ display:grid; gap:2rem; padding-bottom:1rem; }
+  @media(min-width:900px){ .grid{ grid-template-columns:repeat(3,1fr); gap:2.25rem; } }
+
+  .card{
+    display:flex; flex-direction:column; text-decoration:none; color:inherit;
+    background:var(--paper-2); border:1px solid rgba(23,16,9,.10); border-radius:3px;
+    overflow:hidden; box-shadow:var(--lift-2);
+    transition:transform .45s var(--spring), box-shadow .45s var(--spring);
+  }
+  .card:hover, .card:focus-visible{ transform:translateY(-4px); box-shadow:var(--lift-3); outline:none; }
+  .card:focus-visible{ border-color:var(--gold-ink); }
+  .card:active{ transform:translateY(-1px); }
+  .shot{ display:block; width:100%; aspect-ratio:760/475; object-fit:cover; border-bottom:1px solid rgba(23,16,9,.08); }
+  .body{ padding:1.5rem 1.5rem 1.75rem; }
+  .n{
+    font-family:"EB Garamond",serif; text-transform:uppercase;
+    letter-spacing:.26em; font-size:.6875rem; font-weight:500; color:var(--gold-ink);
+    margin:0 0 .6rem;
+  }
+  .card h2{
+    font-family:"Bodoni Moda",Didot,serif; color:var(--ink); text-transform:uppercase;
+    font-weight:400; letter-spacing:-.01em; font-size:1.45rem; line-height:1; margin:0;
+  }
+  .card p{ margin:.9rem 0 0; font-size:1rem; color:var(--ink-2); }
+  .open{
+    margin-top:1.4rem; display:inline-flex; align-items:center; gap:.5rem;
+    text-transform:uppercase; letter-spacing:.2em; font-size:.6875rem; font-weight:500;
+    color:var(--gold-ink);
+  }
+  .open svg{ transition:transform .4s var(--spring); }
+  .card:hover .open svg{ transform:translateX(4px); }
+
+  .note{
+    margin:4.5rem 0 0; padding:1.75rem 0 0; border-top:1px solid rgba(23,16,9,.10);
+    font-size:.9375rem; color:var(--ink-3); max-width:50rem;
+  }
+  .note strong{ color:var(--ink-2); font-weight:500; }
+  footer{ padding:2.5rem 0 4rem; font-size:.8125rem; color:var(--ink-3); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header><img src="brand_assets/logo-ink.png" alt="Relative Impact with Josh Frates"></header>
+
+  <div class="intro">
+    <p class="script">Three directions</p>
+    <h1>For your website</h1>
+    <div class="rule"></div>
+    <p class="lede">
+      The same words and the same photographs, presented three different ways. Open each
+      one and give it a moment, the pictures move. Worth a look on your phone as well as
+      your computer.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <a class="card" href="v1/">
+      <img class="shot" src="thumbs/v1.jpg" alt="A dark page with black and white photographs rushing toward the viewer" loading="lazy" decoding="async">
+      <div class="body">
+        <p class="n">Direction One</p>
+        <h2>Cinematic</h2>
+        <p>Near black, with a corridor of photographs travelling toward you. The most dramatic of the three, and the closest in feel to your welcome packet.</p>
+        <span class="open">Open
+          <svg width="18" height="8" viewBox="0 0 18 8" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M0 4h16M12.5 1L16 4l-3.5 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card" href="v2/">
+      <img class="shot" src="thumbs/v2.jpg" alt="A warm brown page with sepia photographs presented as mounted prints" loading="lazy" decoding="async">
+      <div class="body">
+        <p class="n">Direction Two</p>
+        <h2>Heirloom</h2>
+        <p>Warm brown and sepia, where every photograph is a print on a cream mount. Softer and more personal, like an album open on a table.</p>
+        <span class="open">Open
+          <svg width="18" height="8" viewBox="0 0 18 8" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M0 4h16M12.5 1L16 4l-3.5 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card" href="v3/">
+      <img class="shot" src="thumbs/v3.jpg" alt="A light page with a wall of photographs drifting downward behind the headline" loading="lazy" decoding="async">
+      <div class="body">
+        <p class="n">Direction Three</p>
+        <h2>Paper</h2>
+        <p>Light and editorial, with a wall of prints drifting slowly down behind the words. The calmest of the three and the easiest to read at length.</p>
+        <span class="open">Open
+          <svg width="18" height="8" viewBox="0 0 18 8" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M0 4h16M12.5 1L16 4l-3.5 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div class="note">
+    <p style="margin:0 0 1rem">
+      <strong>A few things to know before you look.</strong>
+      These are drafts, so not everything is finished yet. Each one has the top of the
+      page, one full section and the footer. The menu links and buttons do not go
+      anywhere yet.
+    </p>
+    <p style="margin:0 0 1rem">
+      <strong>The photographs are stand-ins.</strong> They come from a stock library, not
+      from your work, and they are there to show how real photographs will sit in the
+      layout. Your own films and family photographs would replace all of them.
+    </p>
+    <p style="margin:0">
+      <strong>Two of the fonts are stand-ins too.</strong> The display and body faces in
+      your welcome packet are not licensed for websites yet, so these use the closest
+      free matches. The script in your logo is exactly right. Worth deciding early,
+      because swapping them later changes every headline.
+    </p>
+  </div>
+
+  <footer>Prepared for Josh Frates &middot; September 2026</footer>
+</div>
+
+</body>
+</html>
