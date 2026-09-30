@@ -267,7 +267,13 @@ tailwind.config = {
   #menu-btn[aria-expanded="true"] #mb-3{ opacity:0; transform:translateX(-8px); }
 
   /* mobile menu */
-  #mobile-panel{ opacity:0; transform:translateY(-8px); pointer-events:none;
+  /* Hung below the bar rather than sitting in the header's flow. While closed
+     this panel is only transparent, not gone, so in flow it still gave the
+     header its full open height, and the scrolled veil (inset:0 of the header)
+     painted a blurred slab over half a phone screen. */
+  #mobile-panel{
+    position:absolute; top:100%; left:0; right:0;
+    opacity:0; transform:translateY(-8px); pointer-events:none;
     transition:opacity .45s var(--spring), transform .55s var(--spring); }
   #mobile-panel.open{ opacity:1; transform:none; pointer-events:auto; }
 
